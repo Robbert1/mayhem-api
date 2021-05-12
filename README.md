@@ -82,6 +82,10 @@ When using Java, the fastest option is to add this API library as a dependency b
   </dependencies>
 ```
 
+**See Slack channel for the correct ACCESS_TOKEN**
+
+Or just clone this repo and run `mvn install` locally.
+
 If you prefer to directly include the java sources into your project just clone this repo and copy them.
  
 ## Protocol
