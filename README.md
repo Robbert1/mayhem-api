@@ -69,7 +69,7 @@ When using Java, the fastest option is to add this API library as a dependency b
     <repository>
       <id>mayhem-api</id>
       <name>Mayhem API</name>
-      <url>https://robbert1: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@maven.pkg.github.com/Robbert1/mayhem-api</url>
+      <url>https://robbert1:<ACCESS_TOKEN>@maven.pkg.github.com/Robbert1/mayhem-api</url>
     </repository>
   </repositories>
   
