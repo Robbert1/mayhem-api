@@ -46,24 +46,12 @@ public class StatusMessage implements OutputMessage {
             return name;
         }
 
-        public void setName(final String name) {
-            this.name = name;
-        }
-
         public int getWins() {
             return wins;
         }
 
-        public void setWins(final int wins) {
-            this.wins = wins;
-        }
-
         public int getLosses() {
             return losses;
-        }
-
-        public void setLosses(final int losses) {
-            this.losses = losses;
         }
     }
 
@@ -101,6 +89,14 @@ public class StatusMessage implements OutputMessage {
         return result;
     }
 
+    public CompetitionStatus getCompetitionStatus() {
+        return competitionStatus;
+    }
+
+    public List<PlayerResult> getCompetitionResult() {
+        return competitionResult;
+    }
+
     @Override
     public Date getTimestamp() {
         return timestamp;
@@ -113,6 +109,8 @@ public class StatusMessage implements OutputMessage {
                 ", opponent=" + opponent +
                 ", status=" + status +
                 ", result=" + result +
+                ", competitionStatus=" + competitionStatus +
+                ", competitionResult=" + competitionResult +
                 ", timestamp=" + timestamp +
                 '}';
     }
