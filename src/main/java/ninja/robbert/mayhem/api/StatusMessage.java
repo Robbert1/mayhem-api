@@ -53,6 +53,15 @@ public class StatusMessage implements OutputMessage {
         public int getLosses() {
             return losses;
         }
+
+        @Override
+        public String toString() {
+            return "PlayerResult {" +
+                    "name=" + name + 
+                    ", wins=" + wins + 
+                    ", losses=" + losses +
+                    "}";
+            }
     }
 
     StatusMessage() {
