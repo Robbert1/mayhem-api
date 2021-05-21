@@ -77,7 +77,7 @@ When using Java, the fastest option is to add this API library as a dependency b
     <dependency>
       <groupId>ninja.robbert.mayhem</groupId>
       <artifactId>mayhem-api</artifactId>
-      <version>1.0.0</version>
+      <version>1.1.0</version>
     </dependency>
   </dependencies>
 ```
@@ -118,17 +118,17 @@ After successful registration the server will respond with a "status" message, (
 
 A "status" *idle* message already contains the 3 heroes that the server selected for the player to play with (only their order/id varies currently, you'll all play the same heroes).
 
-`{"type":"status","status":"idle","you":[{id:0,...},{id:1,...},{id:2,...}],"timestamp":1600000000000}` 
+`{"type":"status","status":"idle","competitionStatus":"idle","you":[{id:0,...},{id:1,...},{id:2,...}],"timestamp":1600000000000}` 
 
 ### Fights
 
 Once a player is scheduled to fight another player a "status" *ready* message will be send by the server, containing the heroes of both players.
 
-`{"type":"status","status":"ready":,"you":[{id:0,...},{id:1,...},{id:2,...],"opponent":[{id:3,...},{id:4,...},{id:5,...],"timestamp":1600000000000}`
+`{"type":"status","status":"ready","competitionStatus":"started","you":[{id:0,...},{id:1,...},{id:2,...],"opponent":[{id:3,...},{id:4,...},{id:5,...],"timestamp":1600000000000}`
 
 About 3 seconds later the fight will start and the server will continuously send status updates whenever a state change occurs.
 
-`{"type":"status","status":"fighting","you":[{id:0,...},{id:1,...},{id:2,...],"opponent":[{id:3,...},{id:4,...},{id:5,...],"timestamp":1600000000000}` 
+`{"type":"status","status":"fighting","competitionStatus":"started","you":[{id:0,...},{id:1,...},{id:2,...],"opponent":[{id:3,...},{id:4,...},{id:5,...],"timestamp":1600000000000}` 
 
 At this point it is up to the player to make its code heroes perform one of their mighty skills by sending an action message.
 
@@ -142,8 +142,11 @@ If the fight takes to long its status will change to *overtime*, telling the pla
  
 Once the fight is complete its status will change to *finished*
 
-`{"type":"status","status":"finished",result:"win",...}`
+`{"type":"status","status":"finished","competitionStatus":"started",result:"win",...}`
+ 
+Once the whole competition is complete the **competitionStatus** will change to *finished* and **competitionResult** will contain an ordered list of the results of the players.
 
+`{"type":"status","status":"finished","competitionStatus":"finished",competitionResult:[{"name":"winbot","wins":1,"losses":0},{"name":"failbot","wins":0,"losses":1}]}`
 
 ### Example *ready* status message
 
@@ -151,6 +154,7 @@ Once the fight is complete its status will change to *finished*
 {
   "type": "status",
   "status": "ready",
+  "competitionStatus":"started",
   "you": [
     {
       "id": 0,
@@ -249,6 +253,7 @@ Once the fight is complete its status will change to *finished*
 {
   "type": "status",
   "status": "fighting",
+  "competitionStatus":"started",
   "you": [
     {
       "id": 0,
